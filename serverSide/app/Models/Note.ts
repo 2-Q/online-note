@@ -9,7 +9,7 @@ export default class Note extends BaseModel {
   public user_id: number
 
   @column()
-  public title: string
+  public title: (string | null)
 
   @column()
   public content: (string | null)

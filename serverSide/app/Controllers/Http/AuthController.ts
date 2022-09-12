@@ -11,7 +11,7 @@ export default class AuthController {
         const payload = await request.validate({ schema: validatorSchema })
 
         // ========== verify token ==========
-        const email = payload.token
+        const email = 'new user' //payload.token
 
         // ========== get user ==========
         let user = await User.firstOrCreate({ email }, { name: email })
@@ -21,7 +21,7 @@ export default class AuthController {
 
         return response.status(200).json({
             token: token,
-            data: { user }
+            user
         })
     }
 }

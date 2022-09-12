@@ -15,12 +15,15 @@ export default class NotesController {
   public async store({ auth, request, response }: HttpContextContract) {
     // ========== validate payload ==========
     const validatorSchema = schema.create({
-      title: schema.string(),
+      title: schema.string.nullable(),
       content: schema.string.nullable(),
     })
     const payload = await request.validate({ schema: validatorSchema })
 
     // ========== store data ==========
+    if (!(payload.title || payload.content)) {
+      return response.status(422).json({})
+    }
     const note = await Note.create({ ...payload, user_id: auth.user?.id })
 
     return response.json({ note })
@@ -38,7 +41,7 @@ export default class NotesController {
   public async update({ auth, request, response, params }: HttpContextContract) {
     // ========== validate payload ==========
     const validatorSchema = schema.create({
-      title: schema.string(),
+      title: schema.string.nullable(),
       content: schema.string.nullable(),
     })
     const payload = await request.validate({ schema: validatorSchema })

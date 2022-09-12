@@ -10,3 +10,7 @@ body {
 *:focus-visible{
     outline: none;
 }
+
+textarea:focus{
+    box-shadow: none;
+}
