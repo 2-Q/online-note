@@ -84,8 +84,15 @@ export default function Detail() {
                             onChange={(e) => { setNote({ ...note, title: e.target.value }) }}
                         />
                         <textarea
-                            className="w-full bg-transparent p-0 border-none"
-                            onChange={(e) => { setNote({ ...note, content: e.target.value }) }}
+                            className="w-full bg-transparent p-0 border-none resize-none"
+                            style={{ height: 'calc(100% - 4.5rem)' }}
+                            onChange={(e) => {
+                                let content = e.target.value
+                                if (e.key == 13) {
+                                    content += "\n*"
+                                }
+                                setNote({ ...note, content })
+                            }}
                             placeholder="Write something..."
                             value={note?.content ?? ''}
                         />

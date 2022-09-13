@@ -31,7 +31,14 @@ export default function HeaderSection() {
                             />
                             <div className="absolute card w-[12rem]">
                                 <div
-                                    onClick={blacklist}
+                                    onClick={() => {
+                                        const acc = confirm('You really want to logout this account?')
+                                        if (acc) {
+                                            blacklist()
+                                        } else {
+                                            setShowDropDown(false)
+                                        }
+                                    }}
                                     className="card-body flex items-center cursor-pointer gap-1">
                                     <img src="/icons/IconLogout.png" className="w-4" alt="icon logout" />
                                     <span>logout</span>

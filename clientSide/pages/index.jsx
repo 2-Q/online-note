@@ -6,24 +6,19 @@ import axios from "axios";
 import { googleProvider } from "../utils/authFirebase/providers";
 import { useContext } from "react";
 import AppContext from "../utils/context";
-import { useEffect } from "react";
 
 
 export default function index() {
     const { setUserAuthed, UserAuthed } = useContext(AppContext)
-
-
 
     const submitMedsos = (provider) => {
         const auth = getAuth();
         signInWithPopup(auth, provider)
             .then((result) => {
                 const formData = new FormData();
-                formData.append("token", result.user.accessToken);
-                // formData.append("name", result.user.displayName);
+                formData.append("accessToken", result.user.accessToken);
 
                 axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, formData).then((res) => {
-                    setUserAuthed(res.data.user)
                     Cookies.set("userProfile",
                         JSON.stringify(res.data.user),
                         { expires: 365 },
@@ -34,6 +29,8 @@ export default function index() {
                         { expires: 365 },
                         { secure: true }
                     );
+                    setUserAuthed(res.data.user);
+                    window.location.href = "/note";
                 })
             })
             .catch((error) => {
@@ -41,11 +38,6 @@ export default function index() {
                 console.error(error);
             });
     };
-    useEffect(() => {
-        const userToken = JSON.parse(Cookies.get("userToken"))
-        const TOKEN = userToken?.token
-        console.log(TOKEN   );
-    }, [])
 
 
     return (
@@ -58,7 +50,7 @@ export default function index() {
                 </div>
                 {(UserAuthed?.name) ?
                     <Link href='/note'>
-                        <a className="btn py-[.65rem] bg-amber-400">Take new notes</a>
+                        <a className="btn py-[.65rem] bg-amber-400">List My Note</a>
                     </Link>
                     :
                     <div
