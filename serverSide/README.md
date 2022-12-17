@@ -11,8 +11,8 @@ $ copy .env.example .env
 - Setup your db name, password, etc.
 
 # prepare datase
-$ yarn db migrate:up
-$ yarn db seed:run
+$ node ace migration:run
+$ node ace db:seed
 
 # Run the app
 $ yarn dev
