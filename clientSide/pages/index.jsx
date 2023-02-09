@@ -49,9 +49,7 @@ export default function index() {
                     {/* <div>Your notes will be backed up in the cloud, so you can access them from any device connected to your account</div> */}
                 </div>
                 {(UserAuthed?.name) ?
-                    <Link href='/note'>
-                        <a className="btn py-[.65rem] bg-amber-400">List My Note</a>
-                    </Link>
+                    <Link href='/note' className="btn py-[.65rem] bg-amber-400">List My Note</Link>
                     :
                     <div
                         className="btn-outline text-sm text-gray-500 border-gray-400"

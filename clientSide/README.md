@@ -4,10 +4,12 @@
 # Install dependencies
 $ yarn
 
-# configure .env
+# Create environment variable
 $ copy .env.local.example .env.local
 
-# Fill key value by your firebaseConfig
+# Setup firebaseConfig
+- 'Get firebaseConfig on firebase_console > project_settings > generall(scroll until bottom page)'
+- Fill the .env.local according to your firebaseConfig
 
 # Run the app
 $ yarn dev

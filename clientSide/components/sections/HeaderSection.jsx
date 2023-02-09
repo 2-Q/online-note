@@ -13,9 +13,7 @@ export default function HeaderSection() {
     return (
         <header className="py-4 flex justify-between items-center container">
             <div>
-                <Link href='/'>
-                    <a className="text-lg font-light">DIGINOTES</a>
-                </Link>
+                <Link href='/' className="text-lg font-light">DIGINOTES</Link>
             </div>
             {(UserAuthed?.name) &&
                 <div>

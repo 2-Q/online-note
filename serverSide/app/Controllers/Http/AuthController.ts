@@ -5,15 +5,12 @@ import * as firebaseAdmin from 'firebase-admin';
 const serviceAccount = require('../../../firebaseCredential.json')
 
 // ========== init firebase ==========
+// Get firebaseCredential on your firebase_console > project_settings > service_account > firebase_admin_sdk > generate_new_private_key
 firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert({
         projectId: serviceAccount.project_id,
         privateKey: serviceAccount.private_key,
         clientEmail: '243dwiki.com@gmail.com' //serviceAccount.client_email
-
-        // projectId: process.env.PROJECT_ID,
-        // privateKey: process.env.PRIVATE_KEY,
-        // clientEmail: process.env.CLIENT_EMAIL
     })
 });
 // ======== end init firebase ========

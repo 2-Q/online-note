@@ -67,9 +67,7 @@ export default function Detail() {
             <div className="container">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2 text-lg">
-                        <Link href='/note'>
-                            <a>Note Lists</a>
-                        </Link>
+                        <Link href='/note'>Note Lists</Link>
                         <div>	&#62; </div>
                         <div className="font-extrabold text-base">View Note</div>
                     </div>

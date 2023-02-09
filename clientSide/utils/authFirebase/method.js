@@ -1,4 +1,3 @@
-import firebase from "./init"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const methodLoginSocialMedia = async (provider) => {
@@ -6,8 +5,6 @@ const methodLoginSocialMedia = async (provider) => {
 
     // ====== optional ======> me
     auth.languageCode = 'it';
-    // To apply the default browser preference instead of explicitly setting it.
-    // firebase.auth().useDeviceLanguage();
     provider.setCustomParameters({
         'login_hint': '243dwiki.com@gmail.com'
     });
