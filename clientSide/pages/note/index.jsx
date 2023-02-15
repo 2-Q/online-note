@@ -31,26 +31,27 @@ export default function Index() {
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-lg">
-                        <div className="font-extrabold">Note Lists</div>
-                    </div>
-                    <div>
-                        <Link href='/note/new-note' className="btn bg-amber-400 px-3 py-2">
+        <div className="container mt-4">
+            <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2 text-lg">
+                    <div className="font-extrabold">Note Lists</div>
+                </div>
+                <div>
+                    <Link href='/note/new-note'>
+                        <div className="btn bg-amber-400 px-3 py-2">
                             <b>+</b>
                             <span className="hidden sm:block"> New Note</span>
-                        </Link>
-                    </div>
+                        </div>
+                    </Link>
                 </div>
-                <div className={statusCode == 200 ? 'invisible' : 'visible'}>Loading...</div>
-                <div className="grid grid-cols-12 gap-3">
-                    {notes.map((res, index) => {
-                        return (
-                            <Link key={index}
-                                href={`/note/${res.id}`}
-                                className="xl:col-span-3 lg:col-span-4 col-span-6 card mb-3 cursor-pointer group">
+            </div>
+            <div className={statusCode == 200 ? 'invisible' : 'visible'}>Loading...</div>
+            <div className="grid grid-cols-12 gap-3">
+                {notes.map((res, index) => {
+                    return (
+                        <Link key={index}
+                            href={`/note/${res.id}`}>
+                            <div className="xl:col-span-3 lg:col-span-4 col-span-6 card mb-3 cursor-pointer group">
                                 <div className="card-body">
                                     <div className="mb-1 flex justify-between items-center gap-3">
                                         <div className="card-title whitespace-nowrap truncate">{res.title}</div>
@@ -72,11 +73,11 @@ export default function Index() {
                                     </div>
                                     <div className="line-clamp-3 min-h-[2rem]">{res.content}</div>
                                 </div>
-                            </Link>
-                        )
-                    })}
-                </div>
+                            </div>
+                        </Link>
+                    )
+                })}
             </div>
-        </>
+        </div>
     )
 }

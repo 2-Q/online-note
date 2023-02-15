@@ -63,40 +63,38 @@ export default function Detail() {
     }
 
     return (
-        <>
-            <div className="container">
-                <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-lg">
-                        <Link href='/note'>Note Lists</Link>
-                        <div>	&#62; </div>
-                        <div className="font-extrabold text-base">View Note</div>
-                    </div>
-                </div>
-                <div className={(statusCode == 200) ? 'invisible' : 'visible'}>Loading...</div>
-                <div className="card">
-                    <div className="card-body bg-amber-100 overflow-y-auto" style={{ height: 'calc(100vh - 8rem)' }}>
-                        <input
-                            className="w-full bg-transparent font-extrabold text-lg border-b border-gray-300 mb-4 mt-3 pb-1"
-                            value={(note?.title ?? '')}
-                            placeholder='Title note'
-                            onChange={(e) => { setNote({ ...note, title: e.target.value }) }}
-                        />
-                        <textarea
-                            className="w-full bg-transparent p-0 border-none resize-none"
-                            style={{ height: 'calc(100% - 4.5rem)' }}
-                            onChange={(e) => {
-                                let content = e.target.value
-                                if (e.key == 13) {
-                                    content += "\n*"
-                                }
-                                setNote({ ...note, content })
-                            }}
-                            placeholder="Write something..."
-                            value={note?.content ?? ''}
-                        />
-                    </div>
+        <div className="container mt-4">
+            <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2 text-lg">
+                    <Link href='/note'>Note Lists</Link>
+                    <div>	&#62; </div>
+                    <div className="font-extrabold text-base">View Note</div>
                 </div>
             </div>
-        </>
+            <div className={(statusCode == 200) ? 'invisible' : 'visible'}>Loading...</div>
+            <div className="card">
+                <div className="card-body bg-amber-100 overflow-y-auto" style={{ height: 'calc(100vh - 8rem)' }}>
+                    <input
+                        className="w-full bg-transparent font-extrabold text-lg border-b border-gray-300 mb-4 mt-3 pb-1"
+                        value={(note?.title ?? '')}
+                        placeholder='Title note'
+                        onChange={(e) => { setNote({ ...note, title: e.target.value }) }}
+                    />
+                    <textarea
+                        className="w-full bg-transparent p-0 border-none resize-none"
+                        style={{ height: 'calc(100% - 4.5rem)' }}
+                        onChange={(e) => {
+                            let content = e.target.value
+                            if (e.key == 13) {
+                                content += "\n*"
+                            }
+                            setNote({ ...note, content })
+                        }}
+                        placeholder="Write something..."
+                        value={note?.content ?? ''}
+                    />
+                </div>
+            </div>
+        </div>
     )
 }
