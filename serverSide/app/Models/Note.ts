@@ -14,9 +14,18 @@ export default class Note extends BaseModel {
   @column()
   public content: (string | null)
 
-  @column.dateTime({ autoCreate: true, serializeAs: null })
+  @column.dateTime({
+    autoCreate: true,
+    prepare: (value) => value.toUnixInteger(),
+    consume: (value) => value ? DateTime.fromSeconds(value).toUnixInteger() : null
+  })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
+  @column.dateTime({
+    autoCreate: true,
+    autoUpdate: true,
+    prepare: (value) => value.toUnixInteger(),
+    consume: (value) => value ? DateTime.fromSeconds(value).toUnixInteger() : null
+  })
   public updatedAt: DateTime
 }

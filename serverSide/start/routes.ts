@@ -30,3 +30,4 @@ Route.group(() => {
 
 
 Route.post('/login', 'AuthController.login')
+Route.post('/login-staging', 'AuthController.stagingLogin')

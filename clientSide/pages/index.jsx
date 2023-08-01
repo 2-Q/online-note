@@ -11,6 +11,21 @@ import AppContext from "../utils/context";
 export default function index() {
     const { setUserAuthed, UserAuthed } = useContext(AppContext)
 
+    function handleResponseLogin(res) {
+        Cookies.set("userProfile",
+            JSON.stringify(res.data.user),
+            { expires: 365 },
+            { secure: true }
+        );
+        Cookies.set("userToken",
+            JSON.stringify(res.data.token),
+            { expires: 365 },
+            { secure: true }
+        );
+        setUserAuthed(res.data.user);
+        window.location.href = "/note";
+    }
+
     const submitMedsos = (provider) => {
         const auth = getAuth();
         signInWithPopup(auth, provider)
@@ -18,20 +33,7 @@ export default function index() {
                 const formData = new FormData();
                 formData.append("accessToken", result.user.accessToken);
 
-                axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, formData).then((res) => {
-                    Cookies.set("userProfile",
-                        JSON.stringify(res.data.user),
-                        { expires: 365 },
-                        { secure: true }
-                    );
-                    Cookies.set("userToken",
-                        JSON.stringify(res.data.token),
-                        { expires: 365 },
-                        { secure: true }
-                    );
-                    setUserAuthed(res.data.user);
-                    window.location.href = "/note";
-                })
+                axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, formData).then(handleResponseLogin)
             })
             .catch((error) => {
                 console.clear();
@@ -54,7 +56,13 @@ export default function index() {
                     <div
                         className="btn-outline text-sm text-gray-500 border-gray-400"
                         style={{ borderRadius: '.2rem' }}
-                        onClick={() => submitMedsos(googleProvider)}
+                        onClick={() => {
+                            if (process.env.NEXT_PUBLIC_NODE == 'production') {
+                                submitMedsos(googleProvider)
+                            } else {
+                                axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login-staging`).then(handleResponseLogin)
+                            }
+                        }}
                     >
                         <img src="/images/GoogleLogo.png" className="h-[1.2rem] mb-[.1rem]" alt="google" />
                         <div>Sign in account</div>

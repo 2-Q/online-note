@@ -13,13 +13,13 @@ export default class extends BaseSeeder {
       Note.createMany([
         {
           user_id: user.id,
-          title: `note 1 by ${user.email}`,
-          content: "lorem 1 ipsum dollor"
+          title: `note 1`,
+          content: "Hello world, lorem ipsum dollor"
         },
         {
           user_id: user.id,
-          title: `note 2 by ${user.email}`,
-          content: "lorem 2 ipsum dollor"
+          title: `note 2`,
+          content: "Hello panda, lorem ipsum dollor"
         },
       ])
     }
